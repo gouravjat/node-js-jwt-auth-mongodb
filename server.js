@@ -5,11 +5,12 @@ const dbConfig = require("./app/config/db.config");
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
+// var corsOptions = {
+//   origin: "http://localhost:8081"
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -20,8 +21,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./app/models");
 const Role = db.role;
 
+
+const dbURL = "mongodb+srv://gourav:GOURAV@cluster0.mxhsh.mongodb.net/jwtcluster?retryWrites=true&w=majority"
+
 db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+  .connect(dbURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -36,7 +40,7 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to Gourav's  JWT application." });
 });
 
 // routes
